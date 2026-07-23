@@ -1,0 +1,4 @@
+interface:
+  display_name: "DM Quant API V2.6"
+  short_description: "Query DM Quant fixed income and macro APIs"
+  default_prompt: "Use $dm-quant-api-v26 to query DM Quant API data, look up V2.6 endpoints and fields, search EDB levels, or export bond and macro datasets."
