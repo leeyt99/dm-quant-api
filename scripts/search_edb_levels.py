@@ -7,7 +7,7 @@ from pathlib import Path
 import pandas as pd
 
 DEFAULT_DICTIONARY_PATH = (
-    Path(__file__).resolve().parents[1] / "references" / "edb-levels.csv"
+    Path(__file__).resolve().parents[1] / "assets" / "reference-data" / "edb-levels.csv"
 )
 
 
