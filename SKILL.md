@@ -1,15 +1,15 @@
 ---
 name: dm-quant-api-v26
-description: Query DM Quant PythonAPI V2.6 data for China fixed-income, macro, money-market, futures, fund, equity, FX, EDB, ratings, offshore bond, bill, regional economy, and funding calendar workflows using bundled manual references, EDB hierarchy dictionary, local wheel dependency, and reusable scripts. Use when Codex needs DM API endpoint or field lookup, authenticated DM data calls, EDB indicator search, or CSV/XLSX/JSON exports.
+description: Use only for DM Quant PythonAPI V2.6 endpoint lookup, authenticated API calls, EDB hierarchy search, or DM data exports. Includes a lightweight endpoint index, local EDB dictionary, V2.6 manual extract, bundled wheel, and reusable query scripts.
 ---
 
 # DM Quant API V2.6
 
-Use this skill to answer DM Quant API questions and run data pulls with the bundled V2.6 manual extract, EDB hierarchy dictionary, and local `dm_quant_api_client` wheel.
+Use this skill only when the task explicitly needs DM Quant API calls, endpoint/field lookup, EDB dictionary lookup, or DM data export.
 
 ## Core Rules
 
-- Never invent `api_path`, parameter names, field names, enum values, or history ranges. Confirm them from `references/dm-api-prompt-v2.6.md` or by searching `references/manual-v2.6-20260721-extract.txt`.
+- Never invent `api_path`, parameter names, field names, enum values, or history ranges.
 - Prefer `pythonic=True`; write request parameters and read response fields in `snake_case`.
 - Use `field_names` for field filtering unless the manual explicitly says the endpoint uses another parameter.
 - Convert relative dates such as today, yesterday, latest, recent week, or past month into exact dates before calling the API.
@@ -19,8 +19,9 @@ Use this skill to answer DM Quant API questions and run data pulls with the bund
 
 ## Resource Routing
 
-- For current V2.6 quick rules, function changes, common endpoints, and prompt wording, read `references/dm-api-prompt-v2.6.md`.
-- For exact API paths, parameters, output fields, enum notes, and date range limits, search `references/manual-v2.6-20260721-extract.txt` with `rg`.
+- Start with `references/endpoint-index-v2.6.md` for fast endpoint selection and key parameters.
+- Search `references/manual-v2.6-20260721-extract.txt` with `rg` only when exact input fields, output fields, enum notes, or date range details are needed.
+- Read `references/dm-api-prompt-v2.6.md` only when drafting reusable prompts or explaining V2.6 changes.
 - For EDB level lookup, use `scripts/search_edb_levels.py` against `references/edb-levels.csv`.
 - For direct API calls and exports, use `scripts/query_api.py`.
 - The local dependency wheel is bundled at `assets/dm_quant_api_client-0.2.3-py3-none-any.whl`.
@@ -48,8 +49,8 @@ The official client may use `sm4_key` in older wheels and `app_secret` in newer 
 
 1. Clarify the data need: subject, instruments, fields, frequency, date range, and output format.
 2. Resolve exact dates in Asia/Shanghai time.
-3. Locate the endpoint in the prompt reference or manual extract.
-4. Confirm required parameters, optional filters, output fields, pagination, and history range.
+3. Locate the endpoint in `references/endpoint-index-v2.6.md`.
+4. Confirm exact required parameters, optional filters, output fields, pagination, and history range with targeted `rg` searches only as needed.
 5. Search EDB hierarchy first when the user gives an EDB theme or level rather than a final indicator.
 6. Run `scripts/query_api.py` with exact `api_path` and JSON payload.
 7. Return the endpoint, key request parameters, returned fields, row count, and a short sample. Export to CSV/XLSX/JSON when requested.
